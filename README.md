@@ -22,7 +22,7 @@ Looks like it's not a weekend project. I've been working on it quite a bit. Here
 - [ ] Dropdown GUI
 - [ ] Handle importing images in folders
 - [x] Use double[] instead of Float objects
-- [x] Make Utilites for geometric contains(), intersects(), and other stuff.
+- [ ] Make Utilites for geometric contains(), intersects(), getLineSegments(), getPoints(), etc.
 - [ ] Collision Detection using Quadtrees
 - [ ] Shadow mapping with ray casting (light sources / enemy sight detection)
 - [ ] Enviornment sprites (leafs / clouds)
