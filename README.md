@@ -11,6 +11,7 @@ Looks like it's not a weekend project. I've been working on it quite a bit. Here
 - [ ] Fleeing AI
 - [ ] Attacking AI
 - [ ] Scale objects
+- [ ] Rotate objects
 - [ ] Cursor move map around
 - [ ] Snap camera to boundaries
 - [ ] Map input to GUI
