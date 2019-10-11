@@ -19,8 +19,12 @@ public class Llama extends AnimatedCreature {
         ai.setWanderEnabled(true);
         ai.setWanderAI(WanderAI.from(
             ValueRange.from(
-                TimeUnit.MILLISECONDS.toNanos(500),
+                TimeUnit.SECONDS.toNanos(5),
                 TimeUnit.SECONDS.toNanos(10)
+            ),
+            ValueRange.from(
+                    TimeUnit.MILLISECONDS.toNanos(500),
+                    TimeUnit.SECONDS.toNanos(2)
             )
         ));
 

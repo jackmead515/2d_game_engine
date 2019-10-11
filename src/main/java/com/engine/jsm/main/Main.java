@@ -20,7 +20,6 @@ public class Main {
 	public static World world;
 
 	public static void main(String[] args) {
-
 		engineManager = new EngineManager();
 		guiManager = new GUIManager();
 		display = new Display();
@@ -33,8 +32,10 @@ public class Main {
 		test();
 
 		engineManager.loop();
+	}
 
-//		AssetContainer container = new AssetContainer(4, 100, FloatRect.from(0, 0, 1000, 1000));
+	public static void testQuadTree() {
+		//		AssetContainer container = new AssetContainer(4, 100, FloatRect.from(0, 0, 1000, 1000));
 //
 //		long now = System.nanoTime();
 //		int count = 0;
@@ -77,7 +78,7 @@ public class Main {
 		coin.setLayer(Constants.GROUND_LAYER);
 		coin.setBounds(new double[] {200, 200, 32, 32});
 
-		for(int i = 0; i < 1000; i++) {
+		for(int i = 0; i < 10; i++) {
 			Llama llama = new Llama(0);
 			llama.setLayer(Constants.GROUND_LAYER);
 			llama.setBounds(new double[] {Stats.getScreenWidth()/2, Stats.getScreenHeight()/2, 32, 32});

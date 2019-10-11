@@ -24,6 +24,10 @@ public class Display extends JFrame {
 		return gs[0];
 	}
 
+	public void paint() {
+		this.gameCanvas.paint();
+	}
+
 	public void init() {
 		GraphicsConfiguration gconfig = graphicsDevice.getDefaultConfiguration();
 		Stats.setScreenWidth(gconfig.getBounds().width);

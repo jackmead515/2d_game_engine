@@ -36,7 +36,6 @@ public class EngineManager {
 			Stats.setGameTime(now);
 			Stats.setDelta(delta);
 			if (lastFpsTime >= 1000000000) {
-				System.out.println("Delta: " + delta);
 				Stats.setFps(fps);
 				lastFpsTime = 0;
 				fps = 0;
@@ -56,7 +55,7 @@ public class EngineManager {
 	}
 
 	public void render() {
-		Main.display.gameCanvas.paint();
+		Main.display.paint();
 	}
 
 	public void close() {

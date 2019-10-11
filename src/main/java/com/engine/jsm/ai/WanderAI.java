@@ -8,19 +8,19 @@ import com.engine.jsm.util.NumberUtil;
 public class WanderAI extends AI {
 
     private long lastStateChange;
-    private long wanderStateTime;
-    private long stillStateTime;
     private boolean wander;
     private boolean still;
     private double[] wanderVelocity;
-    private ValueRange stateChange;
+    private ValueRange stillChange;
+    private ValueRange wanderChange;
 
-    public static WanderAI from(ValueRange stateChange) {
-        return new WanderAI(stateChange);
+    public static WanderAI from(ValueRange still, ValueRange wander) {
+        return new WanderAI(still, wander);
     }
 
-    public WanderAI(ValueRange stateChange) {
-        this.stateChange = stateChange;
+    public WanderAI(ValueRange still, ValueRange wander) {
+        this.stillChange = still;
+        this.wanderChange = wander;
         this.still = true;
         this.wander = false;
     }
@@ -49,12 +49,20 @@ public class WanderAI extends AI {
         this.wanderVelocity = wanderVelocity;
     }
 
-    public ValueRange getStateChange() {
-        return stateChange;
+    public ValueRange getStillChange() {
+        return stillChange;
     }
 
-    public void setStateChange(ValueRange stateChange) {
-        this.stateChange = stateChange;
+    public void setStillChange(ValueRange stillChange) {
+        this.stillChange = stillChange;
+    }
+
+    public ValueRange getWanderChange() {
+        return wanderChange;
+    }
+
+    public void setWanderChange(ValueRange wanderChange) {
+        this.wanderChange = wanderChange;
     }
 
     public long getLastStateChange() {
@@ -67,22 +75,21 @@ public class WanderAI extends AI {
 
     @Override
     public void update(Creature self) {
-        if (Stats.getGameTime()-getLastStateChange() >= getStateChange().getValue()) {
+        double past = Stats.getGameTime()-getLastStateChange();
+        if (isWander() && past >= getWanderChange().getValue()) {
+            setStill(true);
+            setWander(false);
+            getStillChange().randomize();
+            setWanderVelocity(new double[] { 0, 0 });
+            self.getMovement().setVelocity(getWanderVelocity());
             setLastStateChange(Stats.getGameTime());
-
-            if (isWander()) {
-                setStill(true);
-                setWander(false);
-                getStateChange().randomize();
-                setWanderVelocity(new double[] { 0, 0 });
-                self.getMovement().setVelocity(getWanderVelocity());
-            } else if (isStill()) {
-                setWander(true);
-                setStill(false);
-                getStateChange().randomize();
-                setWanderVelocity(NumberUtil.randomVector(1));
-                self.getMovement().applyVelocity(getWanderVelocity());
-            }
+        } else if (isStill() && past >= getStillChange().getValue()) {
+            setWander(true);
+            setStill(false);
+            getWanderChange().randomize();
+            setWanderVelocity(NumberUtil.randomVector(1));
+            self.getMovement().applyVelocity(getWanderVelocity());
+            setLastStateChange(Stats.getGameTime());
         }
     }
 
