@@ -6,24 +6,7 @@ EDIT 10/09/2019
 
 Looks like it's not a weekend project. I've been working on it quite a bit. Here is a list of things that I want to implement:
 
-- [ ] Convert to using Canvas
-```
-// With canvas we can do bufferStrategy directly!
-
-BufferStrategy bs = canvas.getBufferStrategy();
-if (bs == null) {
-  canvas.createBufferStrategy(3);
-  return;
-}
-
-Graphics2D g2 = (Graphics2D) canvas.getDrawGraphics();
-
-//Draw stuff!!
-
-g2.dispose();
-bs.show();
-```
-
+- [x] Convert to using Canvas
 - [ ] Wandering AI
 - [ ] Fleeing AI
 - [ ] Attacking AI
@@ -37,8 +20,8 @@ bs.show();
 - [ ] Checkbox GUI
 - [ ] Dropdown GUI
 - [ ] Handle importing images in folders
-- [ ] Use double[] instead of Float objects
-- [ ] Make Utilites for geometric contains(), intersects(), and other stuff.
+- [x] Use double[] instead of Float objects
+- [x] Make Utilites for geometric contains(), intersects(), and other stuff.
 - [ ] Collision Detection using Quadtrees
 - [ ] Shadow mapping with ray casting (light sources / enemy sight detection)
 - [ ] Enviornment sprites (leafs / clouds)
