@@ -12,8 +12,8 @@ Looks like it's not a weekend project. I've been working on it quite a bit. Here
 - [ ] Attacking AI
 - [ ] Scale objects
 - [ ] Rotate objects
-- [ ] Cursor move map around
-- [ ] Snap camera to boundaries
+- [x] Cursor move map around
+- [x] Snap camera to boundaries (Still glitches sometimes...)
 - [ ] Map input to GUI
 - [ ] Map input to player
 - [ ] Button GUI
@@ -22,11 +22,11 @@ Looks like it's not a weekend project. I've been working on it quite a bit. Here
 - [ ] Dropdown GUI
 - [ ] Handle importing images in folders
 - [x] Use double[] instead of Float objects
-- [ ] Make Utilites for geometric contains(), intersects(), getLineSegments(), getPoints(), etc.
-- [ ] Collision Detection using Quadtrees
+- [x] Make Utilites for geometric contains(), intersects(), getLineSegments(), getPoints(), etc.
+- [x] Collision Detection using Quadtrees
 - [ ] Shadow mapping with ray casting (light sources / enemy sight detection)
 - [ ] Enviornment sprites (leafs / clouds)
 - [ ] Particle Emitters
-- [ ] Enable 2D opengl in AWT
+- [x] Enable 2D opengl in AWT
 - [ ] Create TimedEvent class
 - [ ] Add forces (apply to collision sprites)
