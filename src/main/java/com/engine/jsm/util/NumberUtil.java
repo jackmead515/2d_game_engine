@@ -2,6 +2,18 @@ package com.engine.jsm.util;
 
 public class NumberUtil {
 
+    public static double normalize(double value, double projected, double maximum) {
+        return (projected*value)/maximum;
+    }
+
+    public static int[] toIntegers(double[] array) {
+            int[] copy = new int[array.length];
+            for (int i = 0; i < array.length; i++) {
+                copy[i] = (int)array[i];
+            }
+            return copy;
+    }
+
     public static float random(float min, float max) {
         return (float)Math.random()*max + min;
     }

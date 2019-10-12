@@ -8,39 +8,72 @@ import java.awt.event.MouseMotionListener;
 
 public class Mouse implements MouseMotionListener, MouseListener {
 
+    private double[] position;
+    private int mousePressed;
+
+    public Mouse() {
+        mousePressed = 0;
+        position = new double[] { 0, 0 };
+    }
+
+    public int getMousePressed() {
+        return mousePressed;
+    }
+
+    public void setMousePressed(int mousePressed) {
+        this.mousePressed = mousePressed;
+    }
+
+    public double[] getPosition() {
+        return position;
+    }
+
+    public void setPosition(double[] position) {
+        this.position = position;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        Main.guiManager.mouseClicked(e);
+        this.setPosition(new double[] { e.getX(), e.getY() });
+        Main.gui.mouseClicked(e);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        Main.guiManager.mousePressed(e);
+        this.setMousePressed(e.getButton());
+        this.setPosition(new double[] { e.getX(), e.getY() });
+        Main.gui.mousePressed(e);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        Main.guiManager.mouseReleased(e);
+        this.setMousePressed(0);
+        this.setPosition(new double[] { e.getX(), e.getY() });
+        Main.gui.mouseReleased(e);
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        Main.guiManager.mouseEntered(e);
+        this.setPosition(new double[] { e.getX(), e.getY() });
+        Main.gui.mouseEntered(e);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        Main.guiManager.mouseExited(e);
+        this.setPosition(new double[] { e.getX(), e.getY() });
+        Main.gui.mouseExited(e);
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        Main.guiManager.mouseDragged(e);
+        this.setPosition(new double[] { e.getX(), e.getY() });
+        Main.gui.mouseDragged(e);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        Main.guiManager.mouseMoved(e);
+        this.setPosition(new double[] { e.getX(), e.getY() });
+        Main.gui.mouseMoved(e);
     }
 
 }

@@ -7,9 +7,9 @@ import com.engine.jsm.entities.IUpdateable;
 import java.awt.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class LayeredAssetContainer implements IRenderable, IUpdateable {
+public class LayeredAssetContainer<T extends Entity> implements IRenderable, IUpdateable {
 
-    CopyOnWriteArrayList<CopyOnWriteArrayList<Entity>> entities;
+    CopyOnWriteArrayList<CopyOnWriteArrayList<T>> entities;
 
     public LayeredAssetContainer() {
         entities = new CopyOnWriteArrayList<>();
@@ -18,9 +18,9 @@ public class LayeredAssetContainer implements IRenderable, IUpdateable {
         }
     }
 
-    public void add(Entity e) {
+    public void add(T e) {
         if (e.getLayer() <= entities.size()-1) {
-            CopyOnWriteArrayList<Entity> layerEntities = new CopyOnWriteArrayList<>();
+            CopyOnWriteArrayList<T> layerEntities = new CopyOnWriteArrayList<>();
             layerEntities.add(e);
             entities.add(layerEntities);
         } else {
@@ -28,29 +28,38 @@ public class LayeredAssetContainer implements IRenderable, IUpdateable {
         }
     }
 
-    public void remove(Entity e) {
+    public void remove(T e) {
         if (e.getLayer() <= entities.size()-1) {
             entities.get(e.getLayer()).remove(e);
         }
     }
 
-    public CopyOnWriteArrayList<Entity> get(int layer) {
+    public CopyOnWriteArrayList<T> get(int layer) {
         return entities.get(layer);
     }
 
     @Override
     public void render(Graphics2D g2, Canvas reference) {
-        for(CopyOnWriteArrayList<Entity> layer : entities) {
-            for(Entity item : layer) {
+        for(CopyOnWriteArrayList<T> layer : entities) {
+            for(T item : layer) {
                 item.render(g2, reference);
             }
         }
     }
 
     @Override
+    public void renderDebug(Graphics2D g2, Canvas reference) {
+        for(CopyOnWriteArrayList<T> layer : entities) {
+            for(T item : layer) {
+                item.renderDebug(g2, reference);
+            }
+        }
+    }
+
+    @Override
     public void update() {
-        for(CopyOnWriteArrayList<Entity> layer : entities) {
-            for(Entity item : layer) {
+        for(CopyOnWriteArrayList<T> layer : entities) {
+            for(T item : layer) {
                 item.update();
             }
         }

@@ -1,5 +1,6 @@
 package com.engine.jsm.entities;
 
+import com.engine.jsm.abilities.CollisionType;
 import com.engine.jsm.main.Constants;
 
 import java.awt.*;
@@ -7,15 +8,16 @@ import java.awt.*;
 public class Entity implements IRenderable, IUpdateable {
 
 	private int id;
-	private boolean snapToCamera;
 	private double[] dimensions;
 	private double[] position;
+	private double[] nextPosition;
     private double[] scale;
 	private int layer;
 	
 	public Entity(int id) {
 		dimensions = new double[] { 0, 0 };
 		position = new double[] { 0, 0 };
+		nextPosition = new double[] { 0, 0 };
 		scale = new double[] { 1, 1 };
 		layer = Constants.GROUND_LAYER;
 		this.id = id;
@@ -25,15 +27,16 @@ public class Entity implements IRenderable, IUpdateable {
 	public void render(Graphics2D g2, Canvas reference) {}
 
 	@Override
+	public void renderDebug(Graphics2D g2, Canvas reference) {
+		double[] bounds = getBounds();
+		double[] position = getPosition();
+		g2.setColor(Color.GREEN);
+		g2.drawRect((int)bounds[0], (int)bounds[1], (int)bounds[2], (int)bounds[3]);
+		g2.fillOval((int)position[0]-2, (int)position[1]-2, 4, 4);
+	}
+
+	@Override
 	public void update() {}
-
-	public boolean isSnappedToCamera() {
-		return snapToCamera;
-	}
-
-	public void setSnapToCamera(boolean snapToCamera) {
-		this.snapToCamera = snapToCamera;
-	}
 
 	public double[] getDimensions() {
 		return dimensions;
@@ -51,9 +54,10 @@ public class Entity implements IRenderable, IUpdateable {
 		this.dimensions[1] = h;
 	}
 
-	public double[] getPosition() {
-		return position;
-	}
+	/**
+	 * Returns the center of this entity;
+	 */
+	public double[] getPosition() { return position; }
 
 	public void setPosition(double[] position) {
 		this.position = position;
@@ -63,16 +67,33 @@ public class Entity implements IRenderable, IUpdateable {
 		this.position[0] = x;
 	}
 
-	public void setPositionY(double x) {
-		this.position[1] = x;
+	public void setPositionY(double y) {
+		this.position[1] = y;
 	}
 
+	public double[] getTopLeftCorner() {
+		return new double[] {
+			position[0]-dimensions[0]/2,
+			position[1]-dimensions[1]/2
+		};
+	}
+
+	public double[] getNextPosition() { return nextPosition; }
+
+	public void setNextPosition(double[] nextPosition) { this.nextPosition = nextPosition; }
+
+	/**
+	 * Gets the resulting rectangle from the position and dimensions.
+	 * Position is translated by half the of the respecting dimension
+	 * as the position is the center of this entity;
+	 * @return
+	 */
 	public double[] getBounds() {
-		double[] position = getPosition();
+		double[] corner = getTopLeftCorner();
 		double[] dimension = getDimensions();
 		return new double[] {
-			position[0]-dimension[0]/2,
-			position[1]-dimension[1]/2,
+			corner[0],
+			corner[1],
 			dimension[0],
 			dimension[1]
 		};

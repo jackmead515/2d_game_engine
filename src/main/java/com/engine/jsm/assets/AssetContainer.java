@@ -6,28 +6,41 @@ import com.engine.jsm.entities.IRenderable;
 import java.awt.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class AssetContainer implements IRenderable {
+public class AssetContainer<T extends Entity> implements IRenderable {
 
-    CopyOnWriteArrayList<Entity> entities;
+    CopyOnWriteArrayList<T> entities;
 
     public AssetContainer() {
         entities = new CopyOnWriteArrayList<>();
     }
 
-    public void add(Entity e) {
+    public void add(T e) {
         entities.add(e);
     }
 
-    public void remove(Entity e) {
+    public void remove(T e) {
         entities.remove(e);
     }
 
-    public Entity get(int index) {
+    public T get(int index) {
         return entities.get(index);
+    }
+
+    public CopyOnWriteArrayList<T> list() {
+        return entities;
     }
 
     @Override
     public void render(Graphics2D g2, Canvas reference) {
+        for (T item : entities) {
+            item.render(g2, reference);
+        }
+    }
 
+    @Override
+    public void renderDebug(Graphics2D g2, Canvas reference) {
+        for (T item : entities) {
+            item.renderDebug(g2, reference);
+        }
     }
 }

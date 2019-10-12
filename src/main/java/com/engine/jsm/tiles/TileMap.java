@@ -28,4 +28,9 @@ public class TileMap implements IRenderable {
         }
     }
 
+    @Override
+    public void renderDebug(Graphics2D g2, Canvas reference) {
+
+    }
+
 }

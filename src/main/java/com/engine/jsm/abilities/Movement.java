@@ -74,6 +74,7 @@ public class Movement implements ICreatureUpdateable {
         x+=force[0];
         y+=force[1];
 
-        self.setPosition(new double[] { x, y });
+        self.setNextPosition(new double[] { x, y });
+        //self.setPosition(new double[] { x, y });
     }
 }

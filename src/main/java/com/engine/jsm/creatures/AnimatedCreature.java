@@ -4,18 +4,15 @@ import com.engine.jsm.images.ImageManager;
 import com.engine.jsm.main.Stats;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class AnimatedCreature extends Creature {
 
     private BufferedImage[] images;
     private long updateTime;
-    private long lastUpdate;
 
     public AnimatedCreature(int id, int imageId) {
         super(id);
-        lastUpdate = 0;
         updateTime = 0;
         images = ImageManager.get(imageId);
     }

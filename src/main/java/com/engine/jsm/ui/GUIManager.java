@@ -42,6 +42,15 @@ public class GUIManager implements IUpdateable, IRenderable, MouseMotionListener
     }
 
     @Override
+    public void renderDebug(Graphics2D g2, Canvas reference) {
+        for(CopyOnWriteArrayList<GUI> layer : items) {
+            for(GUI item : layer) {
+                item.renderDebug(g2, reference);
+            }
+        }
+    }
+
+    @Override
     public void update() {
         for(CopyOnWriteArrayList<GUI> layer : items) {
             for(GUI item : layer) {

@@ -3,6 +3,7 @@ package com.engine.jsm.main;
 public class Stats {
 	
 	private static float fps;
+	private static boolean debug;
 	private static int entityCount;
 	private static int screenWidth;
 	private static int screenHeight;
@@ -22,7 +23,8 @@ public class Stats {
 	public static synchronized void setEntityCount(int entityCount) {
 		Stats.entityCount = entityCount;
 	}
-
+	public static synchronized boolean isDebug() { return debug; }
+	public static synchronized void setDebug(boolean debug) { Stats.debug = debug; }
 	public static synchronized int getScreenWidth() {
 		return screenWidth;
 	}
