@@ -5,96 +5,96 @@ import com.engine.jsm.entities.ICreatureUpdateable;
 
 public class Stats implements ICreatureUpdateable {
 
-    private float health;
-    private float mana;
-    private float energy;
-    private float strength;
-    private float agility;
-    private float defence;
-    private float stamina;
-    private float castSpeed;
-    private float attackSpeed;
-    private float movementSpeed;
+    private double health;
+    private double mana;
+    private double energy;
+    private double strength;
+    private double agility;
+    private double defence;
+    private double stamina;
+    private double castSpeed;
+    private double attackSpeed;
+    private double movementSpeed;
 
     public Stats() {
 
     }
 
-    public float getHealth() {
+    public double getHealth() {
         return health;
     }
 
-    public void setHealth(float health) {
+    public void setHealth(double health) {
         this.health = health;
     }
 
-    public float getMana() {
+    public double getMana() {
         return mana;
     }
 
-    public void setMana(float mana) {
+    public void setMana(double mana) {
         this.mana = mana;
     }
 
-    public float getEnergy() {
+    public double getEnergy() {
         return energy;
     }
 
-    public void setEnergy(float energy) {
+    public void setEnergy(double energy) {
         this.energy = energy;
     }
 
-    public float getStrength() {
+    public double getStrength() {
         return strength;
     }
 
-    public void setStrength(float strength) {
+    public void setStrength(double strength) {
         this.strength = strength;
     }
 
-    public float getAgility() {
+    public double getAgility() {
         return agility;
     }
 
-    public void setAgility(float agility) {
+    public void setAgility(double agility) {
         this.agility = agility;
     }
 
-    public float getDefence() {
+    public double getDefence() {
         return defence;
     }
 
-    public void setDefence(float defence) {
+    public void setDefence(double defence) {
         this.defence = defence;
     }
 
-    public float getStamina() {
+    public double getStamina() {
         return stamina;
     }
 
-    public void setStamina(float stamina) {
+    public void setStamina(double stamina) {
         this.stamina = stamina;
     }
 
-    public float getCastSpeed() {
+    public double getCastSpeed() {
         return castSpeed;
     }
 
-    public void setCastSpeed(float castSpeed) {
+    public void setCastSpeed(double castSpeed) {
         this.castSpeed = castSpeed;
     }
 
-    public float getAttackSpeed() {
+    public double getAttackSpeed() {
         return attackSpeed;
     }
 
-    public void setAttackSpeed(float attackSpeed) {
+    public void setAttackSpeed(double attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
 
-    public float getMovementSpeed() { return movementSpeed; }
+    public double getMovementSpeed() { return movementSpeed; }
 
-    public void setMovementSpeed(float movementSpeed) {
+    public void setMovementSpeed(double movementSpeed) {
         this.movementSpeed = movementSpeed;
     }
 

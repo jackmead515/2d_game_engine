@@ -13,9 +13,14 @@ import com.engine.jsm.sprites.SmallCoin;
 import com.engine.jsm.ui.Button;
 import com.engine.jsm.ui.GUIManager;
 import com.engine.jsm.ui.ThinFatScroll;
+import com.engine.jsm.util.GeomUtil;
+import com.engine.jsm.util.NumberUtil;
 import com.engine.jsm.world.World;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
@@ -38,10 +43,33 @@ public class Main {
 
 		test();
 		testBoundaries();
-		//testQuadTree();
 		testGUI();
+		//testSat();
+		//testQuadTree();
 
 		engine.loop();
+	}
+
+	public static void testSat() {
+		double[] r1 = new double[] { 20, 21, 10, 10 };
+		double[] v1 = new double[] { 1, 1 };
+		double[] r2 = new double[] { 30, 30, 10, 10 };
+
+		double[] translation = GeomUtil.satWillIntersect(r1, r2, v1);
+
+		System.out.println(Arrays.toString(NumberUtil.toIntegers(r1)));
+		System.out.println(Arrays.toString(NumberUtil.toIntegers(r2)));
+
+		if(translation != null) {
+			r1[0] += v1[0]+translation[0];
+			r1[1] += v1[1]+translation[1];
+		} else {
+			r1[0] += v1[0];
+			r1[1] += v1[1];
+		}
+
+		System.out.println(Arrays.toString(NumberUtil.toIntegers(r1)));
+		System.out.println(Arrays.toString(NumberUtil.toIntegers(r2)));
 	}
 
 	public static void testBoundaries() {
@@ -182,7 +210,7 @@ public class Main {
 		for(int i = 0; i < 10; i++) {
 			Llama llama = new Llama(0);
 			llama.setLayer(Constants.GROUND_LAYER);
-			llama.setBounds(new double[] { Stats.getScreenWidth()/2, Stats.getScreenHeight()/2, 32, 32 });
+			llama.setBounds(new double[] { Stats.getScreenWidth()/2-100, Stats.getScreenHeight()/2-200, 32, 32 });
 			world.addCollisionEntity(llama);
 		}
 

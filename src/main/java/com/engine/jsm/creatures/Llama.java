@@ -12,7 +12,7 @@ public class Llama extends AnimatedCreature {
     public Llama(int id) {
         super(id, ImageConstants.LLAMA_SHEET);
         this.setUpdateTime(TimeUnit.MILLISECONDS.toNanos(80));
-        this.getStats().setMovementSpeed(1);
+        this.getStats().setMovementSpeed(1.2);
 
         AIController ai = new AIController();
         ai.setState(AIState.CYCLE);
@@ -23,8 +23,8 @@ public class Llama extends AnimatedCreature {
                 TimeUnit.SECONDS.toNanos(10)
             ),
             ValueRange.from(
-                    TimeUnit.MILLISECONDS.toNanos(500),
-                    TimeUnit.SECONDS.toNanos(2)
+                TimeUnit.MILLISECONDS.toNanos(500),
+                TimeUnit.SECONDS.toNanos(2)
             )
         ));
 

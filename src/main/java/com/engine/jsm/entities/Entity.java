@@ -78,6 +78,19 @@ public class Entity implements IRenderable, IUpdateable {
 		};
 	}
 
+	public void setTopLeftCorner(double[] position) {
+		setPositionX(position[0]+dimensions[0]/2);
+		setPositionY(position[1]+dimensions[1]/2);
+	}
+
+	public void setTopLeftCornerX(double x) {
+		setPositionX(x+dimensions[0]/2);
+	}
+
+	public void setTopLeftCornerY(double y) {
+		setPositionY(y+dimensions[1]/2);
+	}
+
 	public double[] getNextPosition() { return nextPosition; }
 
 	public void setNextPosition(double[] nextPosition) { this.nextPosition = nextPosition; }

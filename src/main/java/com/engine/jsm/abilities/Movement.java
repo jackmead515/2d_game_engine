@@ -7,16 +7,33 @@ public class Movement implements ICreatureUpdateable {
 
     private double[] velocity;
     private double[] force;
-    private float acceleration;
-    private float deceleration;
 
     public Movement() {
         velocity = new double[] { 0, 0 };
         force = new double[] { 0, 0 };
-        acceleration = 1;
-        deceleration = 1;
     }
 
+    /**
+     * This gets the velocity of the target after
+     * the delta time and movement speed have been
+     * included.
+     * @param self - A reference to the creature
+     */
+    public double[] getProjectedVelocity(Creature self) {
+        double delta = com.engine.jsm.main.Stats.getDelta();
+        double speed = self.getStats().getMovementSpeed();
+        double[] velocity = getVelocity();
+        return new double[] {
+            velocity[0]*speed*delta,
+            velocity[1]*speed*delta
+        };
+    }
+
+    /**
+     * The velocity of this entity.
+     * This does not include the movement
+     * speed or delta time factor.
+     */
     public double[] getVelocity() {
         return velocity;
     }
@@ -25,20 +42,12 @@ public class Movement implements ICreatureUpdateable {
         this.velocity = velocity;
     }
 
-    public float getAcceleration() {
-        return acceleration;
+    public void setVelocityX(double x) {
+        this.velocity[0] = x;
     }
 
-    public void setAcceleration(float acceleration) {
-        this.acceleration = acceleration;
-    }
-
-    public float getDeceleration() {
-        return deceleration;
-    }
-
-    public void setDeceleration(float deceleration) {
-        this.deceleration = deceleration;
+    public void setVelocityY(double y) {
+        this.velocity[1] = y;
     }
 
     public void applyVelocity(double[] velocity) {
@@ -61,20 +70,13 @@ public class Movement implements ICreatureUpdateable {
 
     @Override
     public void update(Creature self) {
-        double delta = com.engine.jsm.main.Stats.getDelta();
-        double speed = self.getStats().getMovementSpeed();
         double[] force = getForce();
-        double[] velocity = getVelocity();
         double[] position = self.getPosition();
+        double[] velocity = getProjectedVelocity(self);
 
-        double x = position[0];
-        double y = position[1];
-        x+=velocity[0]*speed*delta;
-        y+=velocity[1]*speed*delta;
-        x+=force[0];
-        y+=force[1];
-
-        self.setNextPosition(new double[] { x, y });
-        //self.setPosition(new double[] { x, y });
+        self.setNextPosition(new double[] {
+            position[0]+velocity[0]+force[0],
+            position[1]+velocity[1]+force[1]
+        });
     }
 }

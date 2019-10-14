@@ -6,6 +6,15 @@ public class NumberUtil {
         return (projected*value)/maximum;
     }
 
+    public static double[] normalizeVector(double[] vector) {
+        double l = Math.sqrt(Math.pow(vector[0], 2) + Math.pow(vector[1], 2));
+        return new double[] { vector[0]/l, vector[1]/l };
+    }
+
+    public static double dotProduct(double[] vector1, double[] vector2) {
+        return vector1[0]*vector2[0] + vector1[1]+vector2[1];
+    }
+
     public static int[] toIntegers(double[] array) {
             int[] copy = new int[array.length];
             for (int i = 0; i < array.length; i++) {

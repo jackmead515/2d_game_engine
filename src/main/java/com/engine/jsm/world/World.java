@@ -32,6 +32,9 @@ public class World implements IRenderable, IUpdateable {
 
     public void init() {
         idCounter = 0;
+        player = new Player(0);
+        player.setBounds(new double[] { 200, 800, 32, 32 });
+
         camera = new Camera();
         collisionEntities = new LayeredAssetContainer<>();
         sprites = new LayeredAssetContainer<>();
@@ -43,6 +46,7 @@ public class World implements IRenderable, IUpdateable {
     @Override
     public void render(Graphics2D g2, Canvas reference) {
         backgroundImage.render(g2, reference);
+        player.render(g2, reference);
         sprites.render(g2, reference);
         collisionEntities.render(g2, reference);
         boundaries.render(g2, reference);
@@ -51,6 +55,7 @@ public class World implements IRenderable, IUpdateable {
     @Override
     public void renderDebug(Graphics2D g2, Canvas reference) {
         backgroundImage.renderDebug(g2, reference);
+        player.renderDebug(g2, reference);
         sprites.renderDebug(g2, reference);
         collisionEntities.renderDebug(g2, reference);
         boundaries.renderDebug(g2, reference);
@@ -61,6 +66,7 @@ public class World implements IRenderable, IUpdateable {
         boundaryQuad.reset();
         boundaryQuad.insertAll(boundaries.list());
         camera.update();
+        player.update();
         sprites.update();
         collisionEntities.update();
         Main.gui.update();
