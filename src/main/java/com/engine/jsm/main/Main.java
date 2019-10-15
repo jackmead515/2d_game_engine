@@ -50,38 +50,20 @@ public class Main {
 		engine.loop();
 	}
 
-	public static void testSat() {
-		double[] r1 = new double[] { 20, 21, 10, 10 };
-		double[] v1 = new double[] { 1, 1 };
-		double[] r2 = new double[] { 30, 30, 10, 10 };
-
-		double[] translation = GeomUtil.satWillIntersect(r1, r2, v1);
-
-		System.out.println(Arrays.toString(NumberUtil.toIntegers(r1)));
-		System.out.println(Arrays.toString(NumberUtil.toIntegers(r2)));
-
-		if(translation != null) {
-			r1[0] += v1[0]+translation[0];
-			r1[1] += v1[1]+translation[1];
-		} else {
-			r1[0] += v1[0];
-			r1[1] += v1[1];
-		}
-
-		System.out.println(Arrays.toString(NumberUtil.toIntegers(r1)));
-		System.out.println(Arrays.toString(NumberUtil.toIntegers(r2)));
-	}
-
 	public static void testBoundaries() {
+		int i = 0;
 		for(int x = 160; x < 832; x+=32) {
 			Boundary b = new Boundary(0);
-			b.setBounds(new double[] { x, 160, 32, 32 });
+			b.setBounds(new double[] { x+i, 160, 32, 32 });
 			world.addBoundary(b);
+			i+=1;
 		}
-		for(int y = 160; y < 416; y+=32) {
+		i = 0;
+		for(int y = 192; y < 416; y+=32) {
 			Boundary b = new Boundary(0);
-			b.setBounds(new double[] { 832, y, 32, 32 });
+			b.setBounds(new double[] { 832, y+i, 32, 32 });
 			world.addBoundary(b);
+			i+=1;
 		}
 	}
 

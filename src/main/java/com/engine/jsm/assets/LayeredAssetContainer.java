@@ -28,6 +28,14 @@ public class LayeredAssetContainer<T extends Entity> implements IRenderable, IUp
         }
     }
 
+    public CopyOnWriteArrayList<T> list() {
+        CopyOnWriteArrayList list = new CopyOnWriteArrayList();
+        for (CopyOnWriteArrayList l : entities) {
+            list.addAll(l);
+        }
+        return list;
+    }
+
     public void remove(T e) {
         if (e.getLayer() <= entities.size()-1) {
             entities.get(e.getLayer()).remove(e);
@@ -35,6 +43,9 @@ public class LayeredAssetContainer<T extends Entity> implements IRenderable, IUp
     }
 
     public CopyOnWriteArrayList<T> get(int layer) {
+        if (layer <= entities.size()-1) {
+            return null;
+        }
         return entities.get(layer);
     }
 

@@ -1,5 +1,6 @@
 package com.engine.jsm.world;
 
+import com.engine.jsm.assets.LayeredAssetQuad;
 import com.engine.jsm.boundaries.Boundary;
 import com.engine.jsm.assets.AssetContainer;
 import com.engine.jsm.assets.AssetQuad;
@@ -24,7 +25,10 @@ public class World implements IRenderable, IUpdateable {
     private Camera camera;
     private TileMap backgroundImage;
     private LayeredAssetContainer<Sprite> sprites;
+
     private LayeredAssetContainer<CollisionEntity> collisionEntities;
+    private LayeredAssetQuad<CollisionEntity> collisionEntityQuad;
+
     private AssetContainer<Boundary> boundaries;
     private AssetQuad<Boundary> boundaryQuad;
 
@@ -33,10 +37,11 @@ public class World implements IRenderable, IUpdateable {
     public void init() {
         idCounter = 0;
         player = new Player(0);
-        player.setBounds(new double[] { 200, 800, 32, 32 });
+        player.setBounds(new double[] { 400, 200, 32, 32 });
 
         camera = new Camera();
         collisionEntities = new LayeredAssetContainer<>();
+        collisionEntityQuad = new LayeredAssetQuad<>();
         sprites = new LayeredAssetContainer<>();
         boundaries = new AssetContainer<>();
         boundaryQuad = new AssetQuad<>(0, 100, 100, new double[] {0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT});
@@ -65,6 +70,8 @@ public class World implements IRenderable, IUpdateable {
     public void update() {
         boundaryQuad.reset();
         boundaryQuad.insertAll(boundaries.list());
+        collisionEntityQuad.reset();
+        collisionEntityQuad.addAll(collisionEntities.list());
         camera.update();
         player.update();
         sprites.update();
@@ -110,6 +117,7 @@ public class World implements IRenderable, IUpdateable {
     public void addCollisionEntity(CollisionEntity entity) {
         entity.setId(idCounter++);
         collisionEntities.add(entity);
+        collisionEntityQuad.add(entity);
     }
 
     public LayeredAssetContainer getSprites() {
@@ -121,6 +129,10 @@ public class World implements IRenderable, IUpdateable {
     }
 
     public LayeredAssetContainer<CollisionEntity> getCollisionEntities() { return collisionEntities; }
+
+    public LayeredAssetQuad<CollisionEntity> getCollisionEntityQuad() {
+        return collisionEntityQuad;
+    }
 
     public AssetQuad<Boundary> getBoundaryQuad() {
         return boundaryQuad;

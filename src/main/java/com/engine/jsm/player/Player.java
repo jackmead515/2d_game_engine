@@ -21,20 +21,20 @@ public class Player extends Creature implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
-            case KeyEvent.VK_W: getMovement().setVelocityY(-1); break;
-            case KeyEvent.VK_A: getMovement().setVelocityX(-1); break;
-            case KeyEvent.VK_S: getMovement().setVelocityY(1); break;
-            case KeyEvent.VK_D: getMovement().setVelocityX(1); break;
+            case KeyEvent.VK_W: getPhysics().setVelocityY(-1); break;
+            case KeyEvent.VK_A: getPhysics().setVelocityX(-1); break;
+            case KeyEvent.VK_S: getPhysics().setVelocityY(1); break;
+            case KeyEvent.VK_D: getPhysics().setVelocityX(1); break;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
-            case KeyEvent.VK_W: getMovement().setVelocityY(0); break;
-            case KeyEvent.VK_A: getMovement().setVelocityX(0); break;
-            case KeyEvent.VK_S: getMovement().setVelocityY(0); break;
-            case KeyEvent.VK_D: getMovement().setVelocityX(0); break;
+            case KeyEvent.VK_W: getPhysics().setVelocityY(0); break;
+            case KeyEvent.VK_A: getPhysics().setVelocityX(0); break;
+            case KeyEvent.VK_S: getPhysics().setVelocityY(0); break;
+            case KeyEvent.VK_D: getPhysics().setVelocityX(0); break;
         }
     }
 }

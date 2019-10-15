@@ -1,7 +1,6 @@
 package com.engine.jsm.creatures;
 
-import com.engine.jsm.abilities.Collision;
-import com.engine.jsm.abilities.Movement;
+import com.engine.jsm.abilities.Physics;
 import com.engine.jsm.abilities.Stats;
 import com.engine.jsm.ai.AIController;
 import com.engine.jsm.entities.CollisionEntity;
@@ -9,35 +8,28 @@ import com.engine.jsm.entities.CollisionEntity;
 public class Creature extends CollisionEntity {
 
     private Stats stats;
-    private Movement movement;
+    private Physics physics;
     private AIController ai;
-    private Collision collision;
 
     public Creature(int id) {
         super(id);
-        collision = new Collision();
         ai = new AIController();
         stats = new Stats();
-        movement = new Movement();
+        physics = new Physics();
     }
 
     @Override
     public void update() {
         this.updateImage();
         this.updateAI();
-        this.updateMovement();
-        this.updateCollision();
+        this.updatePhysics();
         this.updateStats();
-    }
-
-    public void updateCollision() {
-        this.getCollision().update(this);
     }
 
     public void updateImage() {}
 
-    public void updateMovement() {
-        this.getMovement().update(this);
+    public void updatePhysics() {
+        this.getPhysics().update(this);
     }
 
     public void updateAI() {
@@ -58,12 +50,12 @@ public class Creature extends CollisionEntity {
         this.stats = stats;
     }
 
-    public Movement getMovement() {
-        return movement;
+    public Physics getPhysics() {
+        return physics;
     }
 
-    public void setMovement(Movement movement) {
-        this.movement = movement;
+    public void setPhysics(Physics physics) {
+        this.physics = physics;
     }
 
     public AIController getAI() {
@@ -72,13 +64,5 @@ public class Creature extends CollisionEntity {
 
     public void setAI(AIController ai) {
         this.ai = ai;
-    }
-
-    public Collision getCollision() {
-        return collision;
-    }
-
-    public void setCollision(Collision collision) {
-        this.collision = collision;
     }
 }

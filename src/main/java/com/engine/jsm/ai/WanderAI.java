@@ -81,14 +81,14 @@ public class WanderAI extends AI {
             setWander(false);
             getStillChange().randomize();
             setWanderVelocity(new double[] { 0, 0 });
-            self.getMovement().setVelocity(getWanderVelocity());
+            self.getPhysics().setVelocity(getWanderVelocity());
             setLastStateChange(Stats.getGameTime());
         } else if (isStill() && past >= getStillChange().getValue()) {
             setWander(true);
             setStill(false);
             getWanderChange().randomize();
             setWanderVelocity(NumberUtil.randomVector(1));
-            self.getMovement().applyVelocity(getWanderVelocity());
+            self.getPhysics().applyVelocity(getWanderVelocity());
             setLastStateChange(Stats.getGameTime());
         }
     }

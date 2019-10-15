@@ -91,10 +91,6 @@ public class Entity implements IRenderable, IUpdateable {
 		setPositionY(y+dimensions[1]/2);
 	}
 
-	public double[] getNextPosition() { return nextPosition; }
-
-	public void setNextPosition(double[] nextPosition) { this.nextPosition = nextPosition; }
-
 	/**
 	 * Gets the resulting rectangle from the position and dimensions.
 	 * Position is translated by half the of the respecting dimension
